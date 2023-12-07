@@ -1,0 +1,802 @@
+[
+  {
+    "id": "VPG-7476",
+    "organizationName": "Digital Feed",
+    "propertyName": "Virtual Home",
+    "jobCount": 7,
+    "status": "completed",
+    "cleaningCost": 886.8531835032627
+  },
+  {
+    "id": "FTR-5546",
+    "organizationName": "Back-end Circuit",
+    "propertyName": "Virtual Home",
+    "jobCount": 2,
+    "status": "scheduled",
+    "cleaningCost": 292.804473079741
+  },
+  {
+    "id": "FST-1963",
+    "organizationName": "Open-source Array",
+    "propertyName": "Cross-platform Home",
+    "jobCount": 4,
+    "status": "completed",
+    "cleaningCost": 3191.985895228572
+  },
+  {
+    "id": "PRJ-3481",
+    "organizationName": "Multi-byte Sensor",
+    "propertyName": "Redundant Home",
+    "jobCount": 6,
+    "status": "pending",
+    "cleaningCost": 3902.545621013269
+  },
+  {
+    "id": "WDO-4517",
+    "organizationName": "Multi-byte Microchip",
+    "propertyName": "Bluetooth Home",
+    "jobCount": 9,
+    "status": "pending",
+    "cleaningCost": 3671.2118225637823
+  },
+  {
+    "id": "KNM-8875",
+    "organizationName": "Virtual Interface",
+    "propertyName": "Open-source Office",
+    "jobCount": 7,
+    "status": "scheduled",
+    "cleaningCost": 261.7772018071264
+  },
+  {
+    "id": "QGJ-1523",
+    "organizationName": "Back-end Capacitor",
+    "propertyName": "Haptic Home",
+    "jobCount": 1,
+    "status": "inProgress",
+    "cleaningCost": 967.0252917101607
+  },
+  {
+    "id": "BOY-2327",
+    "organizationName": "Neural Monitor",
+    "propertyName": "Optical Home",
+    "jobCount": 6,
+    "status": "inProgress",
+    "cleaningCost": 2469.810781022534
+  },
+  {
+    "id": "QKP-8823",
+    "organizationName": "Haptic Application",
+    "propertyName": "Solid state Apartment",
+    "jobCount": 2,
+    "status": "completed",
+    "cleaningCost": 1827.8104400960729
+  },
+  {
+    "id": "GYY-7235",
+    "organizationName": "Optical Microchip",
+    "propertyName": "Multi-byte Home",
+    "jobCount": 3,
+    "status": "inProgress",
+    "cleaningCost": 4220.197573164478
+  },
+  {
+    "id": "CJO-2653",
+    "organizationName": "Bluetooth Driver",
+    "propertyName": "Neural Apartment",
+    "jobCount": 6,
+    "status": "completed",
+    "cleaningCost": 615.9938107943162
+  },
+  {
+    "id": "EZS-9883",
+    "organizationName": "Digital Application",
+    "propertyName": "Solid state Apartment",
+    "jobCount": 10,
+    "status": "inProgress",
+    "cleaningCost": 2797.1179332584143
+  },
+  {
+    "id": "CHI-9797",
+    "organizationName": "Bluetooth Hard drive",
+    "propertyName": "Virtual Apartment",
+    "jobCount": 3,
+    "status": "needsAttention",
+    "cleaningCost": 180.12471075635403
+  },
+  {
+    "id": "FBG-6544",
+    "organizationName": "Cross-platform Port",
+    "propertyName": "Haptic Office",
+    "jobCount": 2,
+    "status": "scheduled",
+    "cleaningCost": 4451.978876790963
+  },
+  {
+    "id": "OOI-2712",
+    "organizationName": "Wireless Port",
+    "propertyName": "Back-end Apartment",
+    "jobCount": 10,
+    "status": "pending",
+    "cleaningCost": 2640.873024170287
+  },
+  {
+    "id": "BVK-2035",
+    "organizationName": "1080p Transmitter",
+    "propertyName": "Bluetooth Apartment",
+    "jobCount": 10,
+    "status": "completed",
+    "cleaningCost": 3097.974171838723
+  },
+  {
+    "id": "AZZ-8666",
+    "organizationName": "Back-end Microchip",
+    "propertyName": "Optical Office",
+    "jobCount": 9,
+    "status": "needsAttention",
+    "cleaningCost": 2024.335759645328
+  },
+  {
+    "id": "DBY-1597",
+    "organizationName": "Multi-byte Hard drive",
+    "propertyName": "Online Office",
+    "jobCount": 6,
+    "status": "completed",
+    "cleaningCost": 3142.6130302948877
+  },
+  {
+    "id": "MKX-3037",
+    "organizationName": "Primary Circuit",
+    "propertyName": "Bluetooth Apartment",
+    "jobCount": 10,
+    "status": "scheduled",
+    "cleaningCost": 328.490076912567
+  },
+  {
+    "id": "SOL-3758",
+    "organizationName": "Redundant Driver",
+    "propertyName": "Digital Home",
+    "jobCount": 3,
+    "status": "pending",
+    "cleaningCost": 2866.090704430826
+  },
+  {
+    "id": "UIU-8760",
+    "organizationName": "Mobile Circuit",
+    "propertyName": "Digital Apartment",
+    "jobCount": 8,
+    "status": "completed",
+    "cleaningCost": 3729.6703286934644
+  },
+  {
+    "id": "ATG-6708",
+    "organizationName": "Haptic Port",
+    "propertyName": "Multi-byte Apartment",
+    "jobCount": 8,
+    "status": "needsAttention",
+    "cleaningCost": 1483.3481910638511
+  },
+  {
+    "id": "AFV-6783",
+    "organizationName": "Redundant Protocol",
+    "propertyName": "Primary Apartment",
+    "jobCount": 9,
+    "status": "inProgress",
+    "cleaningCost": 625.4583999980241
+  },
+  {
+    "id": "SOZ-6807",
+    "organizationName": "Primary Panel",
+    "propertyName": "Open-source Apartment",
+    "jobCount": 1,
+    "status": "scheduled",
+    "cleaningCost": 4486.593576613814
+  },
+  {
+    "id": "NYZ-6758",
+    "organizationName": "Solid state Card",
+    "propertyName": "Cross-platform Apartment",
+    "jobCount": 7,
+    "status": "inProgress",
+    "cleaningCost": 3298.5793354688212
+  },
+  {
+    "id": "ETC-2269",
+    "organizationName": "Mobile Panel",
+    "propertyName": "Solid state Apartment",
+    "jobCount": 4,
+    "status": "scheduled",
+    "cleaningCost": 1233.8198193581775
+  },
+  {
+    "id": "LFR-2682",
+    "organizationName": "Haptic Feed",
+    "propertyName": "Digital Home",
+    "jobCount": 8,
+    "status": "scheduled",
+    "cleaningCost": 2521.6090206755325
+  },
+  {
+    "id": "GMK-1025",
+    "organizationName": "Digital Panel",
+    "propertyName": "Solid state Office",
+    "jobCount": 5,
+    "status": "completed",
+    "cleaningCost": 4379.322724184021
+  },
+  {
+    "id": "KBJ-9724",
+    "organizationName": "Neural Bus",
+    "propertyName": "Redundant Office",
+    "jobCount": 7,
+    "status": "completed",
+    "cleaningCost": 4867.834872519597
+  },
+  {
+    "id": "EDG-3084",
+    "organizationName": "Virtual Bandwidth",
+    "propertyName": "Cross-platform Apartment",
+    "jobCount": 9,
+    "status": "scheduled",
+    "cleaningCost": 865.4838424175978
+  },
+  {
+    "id": "BQA-4369",
+    "organizationName": "Neural Driver",
+    "propertyName": "Neural Home",
+    "jobCount": 2,
+    "status": "inProgress",
+    "cleaningCost": 4679.323724284768
+  },
+  {
+    "id": "QZA-1697",
+    "organizationName": "Cross-platform Microchip",
+    "propertyName": "Neural Home",
+    "jobCount": 3,
+    "status": "needsAttention",
+    "cleaningCost": 3081.224573380314
+  },
+  {
+    "id": "CKG-3050",
+    "organizationName": "Solid state Feed",
+    "propertyName": "Virtual Home",
+    "jobCount": 9,
+    "status": "completed",
+    "cleaningCost": 4606.356796366163
+  },
+  {
+    "id": "IDF-1171",
+    "organizationName": "Mobile Bandwidth",
+    "propertyName": "Back-end Apartment",
+    "jobCount": 2,
+    "status": "completed",
+    "cleaningCost": 929.1400480084121
+  },
+  {
+    "id": "USD-9044",
+    "organizationName": "Haptic Program",
+    "propertyName": "Online Home",
+    "jobCount": 4,
+    "status": "pending",
+    "cleaningCost": 1692.7218168741092
+  },
+  {
+    "id": "RUE-7297",
+    "organizationName": "Digital System",
+    "propertyName": "Haptic Office",
+    "jobCount": 10,
+    "status": "scheduled",
+    "cleaningCost": 3155.4028452839702
+  },
+  {
+    "id": "OJK-4208",
+    "organizationName": "Auxiliary Circuit",
+    "propertyName": "Back-end Home",
+    "jobCount": 7,
+    "status": "completed",
+    "cleaningCost": 4225.689789396711
+  },
+  {
+    "id": "XIC-2786",
+    "organizationName": "Cross-platform Circuit",
+    "propertyName": "Digital Home",
+    "jobCount": 2,
+    "status": "pending",
+    "cleaningCost": 271.7403273098171
+  },
+  {
+    "id": "PXT-4076",
+    "organizationName": "Auxiliary Monitor",
+    "propertyName": "Multi-byte Home",
+    "jobCount": 10,
+    "status": "pending",
+    "cleaningCost": 1873.9672696450725
+  },
+  {
+    "id": "ZHA-5581",
+    "organizationName": "Wireless Card",
+    "propertyName": "Optical Office",
+    "jobCount": 10,
+    "status": "needsAttention",
+    "cleaningCost": 2352.248214231804
+  },
+  {
+    "id": "EQD-6413",
+    "organizationName": "Optical Sensor",
+    "propertyName": "Solid state Home",
+    "jobCount": 4,
+    "status": "scheduled",
+    "cleaningCost": 4102.48490893282
+  },
+  {
+    "id": "FMM-4852",
+    "organizationName": "Back-end Protocol",
+    "propertyName": "Primary Office",
+    "jobCount": 3,
+    "status": "scheduled",
+    "cleaningCost": 3775.1074015162885
+  },
+  {
+    "id": "QOE-2292",
+    "organizationName": "Cross-platform Transmitter",
+    "propertyName": "Open-source Home",
+    "jobCount": 7,
+    "status": "pending",
+    "cleaningCost": 1459.4446020200849
+  },
+  {
+    "id": "ABH-2506",
+    "organizationName": "Auxiliary Panel",
+    "propertyName": "Solid state Office",
+    "jobCount": 9,
+    "status": "inProgress",
+    "cleaningCost": 1172.4749767687172
+  },
+  {
+    "id": "DVD-7302",
+    "organizationName": "Online Card",
+    "propertyName": "Wireless Home",
+    "jobCount": 1,
+    "status": "scheduled",
+    "cleaningCost": 3980.0375126302242
+  },
+  {
+    "id": "UXS-7697",
+    "organizationName": "Cross-platform Driver",
+    "propertyName": "Neural Apartment",
+    "jobCount": 2,
+    "status": "needsAttention",
+    "cleaningCost": 495.8258913131431
+  },
+  {
+    "id": "PQW-8058",
+    "organizationName": "Multi-byte System",
+    "propertyName": "Auxiliary Home",
+    "jobCount": 5,
+    "status": "pending",
+    "cleaningCost": 4210.00882119406
+  },
+  {
+    "id": "RWT-3797",
+    "organizationName": "Virtual Microchip",
+    "propertyName": "Digital Office",
+    "jobCount": 8,
+    "status": "needsAttention",
+    "cleaningCost": 1751.3708083890378
+  },
+  {
+    "id": "AUJ-5206",
+    "organizationName": "Digital Bandwidth",
+    "propertyName": "Haptic Home",
+    "jobCount": 4,
+    "status": "inProgress",
+    "cleaningCost": 1806.187363783829
+  },
+  {
+    "id": "YET-2702",
+    "organizationName": "Redundant Application",
+    "propertyName": "Digital Apartment",
+    "jobCount": 6,
+    "status": "pending",
+    "cleaningCost": 3271.1837391136214
+  },
+  {
+    "id": "FJG-3534",
+    "organizationName": "Redundant Monitor",
+    "propertyName": "Open-source Office",
+    "jobCount": 6,
+    "status": "completed",
+    "cleaningCost": 3756.1974193900824
+  },
+  {
+    "id": "NMJ-2655",
+    "organizationName": "Back-end Application",
+    "propertyName": "Primary Office",
+    "jobCount": 8,
+    "status": "needsAttention",
+    "cleaningCost": 3196.9052919652313
+  },
+  {
+    "id": "HNR-9925",
+    "organizationName": "Solid state Pixel",
+    "propertyName": "Primary Apartment",
+    "jobCount": 10,
+    "status": "scheduled",
+    "cleaningCost": 1391.3554382044822
+  },
+  {
+    "id": "JXI-9579",
+    "organizationName": "Bluetooth Array",
+    "propertyName": "Auxiliary Apartment",
+    "jobCount": 6,
+    "status": "scheduled",
+    "cleaningCost": 4090.829584351741
+  },
+  {
+    "id": "IWY-1131",
+    "organizationName": "1080p Matrix",
+    "propertyName": "Redundant Apartment",
+    "jobCount": 4,
+    "status": "completed",
+    "cleaningCost": 2704.732740460895
+  },
+  {
+    "id": "SEW-1504",
+    "organizationName": "Mobile Array",
+    "propertyName": "Digital Apartment",
+    "jobCount": 6,
+    "status": "scheduled",
+    "cleaningCost": 3586.3765068585053
+  },
+  {
+    "id": "EQU-3388",
+    "organizationName": "Primary Card",
+    "propertyName": "Wireless Office",
+    "jobCount": 2,
+    "status": "pending",
+    "cleaningCost": 2124.6666396036744
+  },
+  {
+    "id": "QYC-5174",
+    "organizationName": "Haptic Array",
+    "propertyName": "Bluetooth Office",
+    "jobCount": 6,
+    "status": "scheduled",
+    "cleaningCost": 1376.460191840306
+  },
+  {
+    "id": "AAE-7112",
+    "organizationName": "Haptic Card",
+    "propertyName": "Auxiliary Office",
+    "jobCount": 9,
+    "status": "needsAttention",
+    "cleaningCost": 3600.7225189357996
+  },
+  {
+    "id": "AOL-7058",
+    "organizationName": "Open-source Application",
+    "propertyName": "Virtual Home",
+    "jobCount": 6,
+    "status": "scheduled",
+    "cleaningCost": 4734.816196188331
+  },
+  {
+    "id": "WNH-6626",
+    "organizationName": "Mobile Pixel",
+    "propertyName": "Neural Home",
+    "jobCount": 5,
+    "status": "scheduled",
+    "cleaningCost": 4494.775636098348
+  },
+  {
+    "id": "IJZ-3423",
+    "organizationName": "Cross-platform Protocol",
+    "propertyName": "Neural Apartment",
+    "jobCount": 6,
+    "status": "needsAttention",
+    "cleaningCost": 620.8869321504608
+  },
+  {
+    "id": "EVM-7846",
+    "organizationName": "Primary Firewall",
+    "propertyName": "Virtual Office",
+    "jobCount": 1,
+    "status": "completed",
+    "cleaningCost": 990.2613918529823
+  },
+  {
+    "id": "HLZ-7411",
+    "organizationName": "Back-end System",
+    "propertyName": "Auxiliary Home",
+    "jobCount": 9,
+    "status": "needsAttention",
+    "cleaningCost": 2151.2643923750147
+  },
+  {
+    "id": "YMZ-3172",
+    "organizationName": "Online Hard drive",
+    "propertyName": "Back-end Office",
+    "jobCount": 9,
+    "status": "inProgress",
+    "cleaningCost": 2498.8254957366735
+  },
+  {
+    "id": "MCV-4931",
+    "organizationName": "Mobile Alarm",
+    "propertyName": "Virtual Office",
+    "jobCount": 3,
+    "status": "needsAttention",
+    "cleaningCost": 1815.1465497910976
+  },
+  {
+    "id": "YWJ-2178",
+    "organizationName": "Online Program",
+    "propertyName": "Auxiliary Home",
+    "jobCount": 4,
+    "status": "scheduled",
+    "cleaningCost": 2029.6922032022849
+  },
+  {
+    "id": "UZU-9159",
+    "organizationName": "Optical Capacitor",
+    "propertyName": "1080p Apartment",
+    "jobCount": 7,
+    "status": "pending",
+    "cleaningCost": 359.6462710760534
+  },
+  {
+    "id": "GHM-1673",
+    "organizationName": "Virtual Pixel",
+    "propertyName": "Multi-byte Home",
+    "jobCount": 2,
+    "status": "completed",
+    "cleaningCost": 1364.6488372934982
+  },
+  {
+    "id": "GRS-5967",
+    "organizationName": "1080p Microchip",
+    "propertyName": "Optical Office",
+    "jobCount": 9,
+    "status": "scheduled",
+    "cleaningCost": 2103.8290375610813
+  },
+  {
+    "id": "HKM-5807",
+    "organizationName": "Redundant Circuit",
+    "propertyName": "Bluetooth Home",
+    "jobCount": 4,
+    "status": "scheduled",
+    "cleaningCost": 1579.8545947531238
+  },
+  {
+    "id": "KRJ-5785",
+    "organizationName": "1080p Interface",
+    "propertyName": "Neural Office",
+    "jobCount": 3,
+    "status": "needsAttention",
+    "cleaningCost": 1880.757196014747
+  },
+  {
+    "id": "HSN-7753",
+    "organizationName": "Online Capacitor",
+    "propertyName": "Mobile Office",
+    "jobCount": 1,
+    "status": "completed",
+    "cleaningCost": 1510.574092110619
+  },
+  {
+    "id": "RWX-3057",
+    "organizationName": "Optical Firewall",
+    "propertyName": "Primary Apartment",
+    "jobCount": 2,
+    "status": "scheduled",
+    "cleaningCost": 4085.8208757359535
+  },
+  {
+    "id": "QUF-2332",
+    "organizationName": "Bluetooth Circuit",
+    "propertyName": "Bluetooth Apartment",
+    "jobCount": 3,
+    "status": "pending",
+    "cleaningCost": 4026.5138337388635
+  },
+  {
+    "id": "GVL-7635",
+    "organizationName": "Open-source Card",
+    "propertyName": "Multi-byte Home",
+    "jobCount": 7,
+    "status": "needsAttention",
+    "cleaningCost": 2562.5630020163953
+  },
+  {
+    "id": "EQB-5943",
+    "organizationName": "Back-end Firewall",
+    "propertyName": "Digital Home",
+    "jobCount": 6,
+    "status": "inProgress",
+    "cleaningCost": 297.9705350706354
+  },
+  {
+    "id": "QFD-2695",
+    "organizationName": "Wireless Monitor",
+    "propertyName": "Online Apartment",
+    "jobCount": 5,
+    "status": "inProgress",
+    "cleaningCost": 3401.218964694999
+  },
+  {
+    "id": "GFM-8892",
+    "organizationName": "Redundant System",
+    "propertyName": "Bluetooth Office",
+    "jobCount": 4,
+    "status": "pending",
+    "cleaningCost": 2881.690734741278
+  },
+  {
+    "id": "OTF-3225",
+    "organizationName": "Optical Circuit",
+    "propertyName": "Virtual Office",
+    "jobCount": 3,
+    "status": "needsAttention",
+    "cleaningCost": 1665.0853828294203
+  },
+  {
+    "id": "FCX-4557",
+    "organizationName": "Solid state Transmitter",
+    "propertyName": "Back-end Office",
+    "jobCount": 7,
+    "status": "completed",
+    "cleaningCost": 715.341034787707
+  },
+  {
+    "id": "CJX-4720",
+    "organizationName": "Back-end Panel",
+    "propertyName": "Solid state Office",
+    "jobCount": 10,
+    "status": "inProgress",
+    "cleaningCost": 4462.6886025536805
+  },
+  {
+    "id": "BZW-9704",
+    "organizationName": "Redundant Application",
+    "propertyName": "Open-source Apartment",
+    "jobCount": 5,
+    "status": "needsAttention",
+    "cleaningCost": 3384.015958197415
+  },
+  {
+    "id": "XVZ-6598",
+    "organizationName": "Haptic Hard drive",
+    "propertyName": "Online Apartment",
+    "jobCount": 7,
+    "status": "needsAttention",
+    "cleaningCost": 1889.2078345874324
+  },
+  {
+    "id": "HKO-5500",
+    "organizationName": "Open-source Driver",
+    "propertyName": "Haptic Apartment",
+    "jobCount": 5,
+    "status": "scheduled",
+    "cleaningCost": 988.3669997798279
+  },
+  {
+    "id": "JVR-6883",
+    "organizationName": "Virtual Protocol",
+    "propertyName": "Virtual Apartment",
+    "jobCount": 8,
+    "status": "completed",
+    "cleaningCost": 4928.335085581057
+  },
+  {
+    "id": "IXB-8261",
+    "organizationName": "Wireless System",
+    "propertyName": "Online Apartment",
+    "jobCount": 2,
+    "status": "completed",
+    "cleaningCost": 3965.097107202746
+  },
+  {
+    "id": "AMU-9148",
+    "organizationName": "Primary System",
+    "propertyName": "Wireless Home",
+    "jobCount": 8,
+    "status": "inProgress",
+    "cleaningCost": 4390.245156059973
+  },
+  {
+    "id": "NRD-1660",
+    "organizationName": "Online Microchip",
+    "propertyName": "Neural Office",
+    "jobCount": 5,
+    "status": "pending",
+    "cleaningCost": 3447.04563326668
+  },
+  {
+    "id": "TJL-9904",
+    "organizationName": "Online Application",
+    "propertyName": "Digital Apartment",
+    "jobCount": 5,
+    "status": "scheduled",
+    "cleaningCost": 2793.1271854322404
+  },
+  {
+    "id": "FJF-8949",
+    "organizationName": "Wireless Feed",
+    "propertyName": "1080p Home",
+    "jobCount": 10,
+    "status": "pending",
+    "cleaningCost": 4409.226880664937
+  },
+  {
+    "id": "DMZ-2838",
+    "organizationName": "Multi-byte Pixel",
+    "propertyName": "Cross-platform Office",
+    "jobCount": 4,
+    "status": "pending",
+    "cleaningCost": 2872.7730045327917
+  },
+  {
+    "id": "VVU-7789",
+    "organizationName": "Haptic Bandwidth",
+    "propertyName": "Multi-byte Apartment",
+    "jobCount": 5,
+    "status": "needsAttention",
+    "cleaningCost": 4024.629257712513
+  },
+  {
+    "id": "YEP-1449",
+    "organizationName": "Mobile Panel",
+    "propertyName": "Redundant Home",
+    "jobCount": 7,
+    "status": "completed",
+    "cleaningCost": 4147.224312275648
+  },
+  {
+    "id": "ZIL-7265",
+    "organizationName": "Haptic Feed",
+    "propertyName": "Mobile Home",
+    "jobCount": 4,
+    "status": "completed",
+    "cleaningCost": 4107.858382258564
+  },
+  {
+    "id": "OFH-7777",
+    "organizationName": "Bluetooth Application",
+    "propertyName": "Solid state Office",
+    "jobCount": 6,
+    "status": "scheduled",
+    "cleaningCost": 2377.3514362284914
+  },
+  {
+    "id": "KMF-4573",
+    "organizationName": "Primary Monitor",
+    "propertyName": "Virtual Home",
+    "jobCount": 3,
+    "status": "needsAttention",
+    "cleaningCost": 1214.2572982935235
+  },
+  {
+    "id": "LCB-4962",
+    "organizationName": "Online Hard drive",
+    "propertyName": "Digital Apartment",
+    "jobCount": 1,
+    "status": "pending",
+    "cleaningCost": 2820.983920362778
+  },
+  {
+    "id": "GPB-5124",
+    "organizationName": "Virtual Capacitor",
+    "propertyName": "Solid state Home",
+    "jobCount": 6,
+    "status": "scheduled",
+    "cleaningCost": 2162.8369707847014
+  },
+  {
+    "id": "MXH-6152",
+    "organizationName": "Mobile Pixel",
+    "propertyName": "1080p Office",
+    "jobCount": 3,
+    "status": "scheduled",
+    "cleaningCost": 796.0347168846056
+  }
+]
