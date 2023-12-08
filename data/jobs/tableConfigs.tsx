@@ -1,8 +1,8 @@
 "use client"
 
-import { TableColumns, FilterConfigType } from '@/components/shared/table/DataTable'
+import { TableColumns, FilterConfigType } from '@/components/table/DataTable'
 import { PlusCircle } from 'lucide-react'
-import { DataTableRowActions } from '@/components/shared/table/DataTableRowActions'
+import { DataTableRowActions } from '@/components/table/DataTableRowActions'
 import { formatCurrency } from '@/lib/utils'
 import { jobStatuses, startDatePresets } from './dropdownValues'
 

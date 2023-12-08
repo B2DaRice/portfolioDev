@@ -1,8 +1,8 @@
 "use client"
 
-import { ListPage, PageActionType } from '@/components/dashboard/ListPage'
+import { ListPage, PageActionType } from '@/components/ListPage'
 // import { organizationsTableColumns, filterConfig } from '@/data/organizations/tableConfigs'
-import { OrganizationDataType } from '@/types/Organizations'
+// import { OrganizationDataType } from '@/types/Organizations'
 import { useState } from 'react'
 import { orgsTableColumns, filterConfig } from './tableConfigs'
 import { TypeFromSchema } from '@/app/api/orgs/schemas'

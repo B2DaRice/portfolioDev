@@ -14,8 +14,8 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import Logo from '@/components/shared/Logo'
-import PageBackLink from '@/components/shared/PageBackLink'
+import Logo from '@/components/Logo'
+import PageBackLink from '@/components/PageBackLink'
 import ErrorMessages from '@/components/auth/ErrorMessages'
 
 const updatePasswordSchema = z

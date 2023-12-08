@@ -6,7 +6,7 @@ import { z } from 'zod'
 import { schema as CurrSchema, TypeFromSchema } from './schemas'
 import { getInitTableData, getJSONContents } from '../utils/serverUtils'
 import { createTestDataTable } from '../utils/fakerUtils'
-import { TABLE_NAMES } from '@/data/testData/defaultTableConfigs'
+import { TABLE_NAMES } from '@/data/testData'
 
 export async function GET(request: NextRequest) {
   try {

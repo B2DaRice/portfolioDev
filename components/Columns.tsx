@@ -7,8 +7,8 @@ import { Checkbox } from "@/components/ui/checkbox"
 
 import { labels, priorities, statuses } from "@/data/tasks/data"
 import { Task } from "@/data/tasks/schema"
-import { DataTableColumnHeader } from "./DataTableColumnHeader"
-import { DataTableRowActions } from "./DataTableRowActions"
+import { DataTableColumnHeader } from "./table/DataTableColumnHeader"
+import { DataTableRowActions } from "./table/DataTableRowActions"
 import { Button } from '@/components/ui/button'
 import { ArrowUpDown } from 'lucide-react'
 

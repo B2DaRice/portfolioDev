@@ -1,7 +1,7 @@
 "use client"
 
-import { TableColumns, FilterConfigType } from '@/components/shared/table/DataTable'
-import { DataTableRowActions } from '@/components/shared/table/DataTableRowActions'
+import { TableColumns, FilterConfigType } from '@/components/table/DataTable'
+import { DataTableRowActions } from '@/components/table/DataTableRowActions'
 import { userStatuses } from './dropdownValues'
 
 export const filterConfig: FilterConfigType[] = [

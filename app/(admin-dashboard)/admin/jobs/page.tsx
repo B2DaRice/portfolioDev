@@ -1,6 +1,6 @@
 "use client"
 
-import { ListPage, PageActionType } from '@/components/dashboard/ListPage'
+import { ListPage, PageActionType } from '@/components/ListPage'
 import { jobTableColumns, filterConfig } from '@/data/jobs/tableConfigs'
 import { JobDataType } from '@/types/Job'
 import { useState } from 'react'

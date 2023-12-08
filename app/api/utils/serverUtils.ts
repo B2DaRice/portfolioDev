@@ -1,4 +1,4 @@
-import { TABLE_NAMES } from '@/data/testData/defaultTableConfigs';
+import { TABLE_NAMES } from '@/data/testData';
 import fs from "fs"
 import path from "path"
 import util from "util"

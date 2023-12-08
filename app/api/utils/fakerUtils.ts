@@ -3,7 +3,7 @@ import path from "path"
 import util from "util"
 import { faker } from "@faker-js/faker"
 import { addDataToJSON, getJSONContents } from './serverUtils'
-import testDataConfigs, { TableName } from '@/data/testData/defaultTableConfigs'
+import testDataConfigs, { TableName } from '@/data/testData'
 import { z } from 'zod'
 
 const websitePostfixes = [ '.js', '.com', '.io' ]

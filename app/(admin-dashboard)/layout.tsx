@@ -16,7 +16,7 @@ import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { Switch } from '@/components/ui/switch'
 import { useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
-import Logo from '@/components/shared/Logo'
+import Logo from '@/components/Logo'
 
 const navigation = [
   { name: 'Jobs', href: '/admin/jobs', icon: BriefcaseIcon },
