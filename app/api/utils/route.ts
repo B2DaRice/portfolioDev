@@ -1,8 +1,5 @@
 // import { createServerSupabaseClient } from '@/utils/supabase/server'
 import { NextRequest, NextResponse } from 'next/server'
-import path from "path"
-import { z } from 'zod'
-import { getJSONContents } from '../utils/serverUtils'
 import { TABLE_NAMES } from '@/data/testData/defaultTableConfigs'
 import { createTestDataTable } from './fakerUtils'
 

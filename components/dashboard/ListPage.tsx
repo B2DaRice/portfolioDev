@@ -111,6 +111,7 @@ export const ListPage = ({
     })
       .then((res) => res.json())
       .then(({ data }) => {
+        console.log('Data fetched:', data)
         if (init && USE_TEST_DATA) {
           setData(data)
         }

@@ -1,6 +1,6 @@
 'use client'
 
-import { Fragment, useContext, useState } from 'react'
+import { Fragment, useContext, useEffect, useState } from 'react'
 import { GlobalContext } from '@/data/globalContext'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
