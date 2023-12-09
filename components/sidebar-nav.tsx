@@ -32,6 +32,19 @@ export function SidebarNav({
   const [isCleaner, setIsCleaner] = useState(role === 'cleaner')
   const [isAdmin, setIsAdmin] = useState(role === 'admin')
 
+  const routes = [
+    {
+      name: 'Dashboard',
+      icon: <HomeIcon />,
+      route: 'dashboard',
+    },
+    {
+      name: 'Orgs',
+      icon: <ClipboardIcon />,
+      route: 'orgs',
+    },
+  ]
+
   return (
     <div className={['h-full pb-12', className].join(' ')}>
       <div className='flex h-full flex-col justify-between'>
@@ -40,7 +53,20 @@ export function SidebarNav({
             {role}
           </h2>
           <div className='space-y-1'>
-            <Button
+            {
+              routes.map(({ name, icon, route }) => (
+                <Button
+                  key={name}
+                  variant={selectedRoute === route ? 'secondary' : 'ghost'}
+                  className='w-full justify-start'
+                  onClick={() => setSelectedRoute(route)}
+                >
+                  {icon}
+                  {name}
+                </Button>
+              ))
+            }
+            {/* <Button
               variant={selectedRoute === 'dashboard' ? 'secondary' : 'ghost'}
               className='w-full justify-start'
               onClick={() => setSelectedRoute('dashboard')}
@@ -111,7 +137,7 @@ export function SidebarNav({
             >
               <GraphIcon />
               Reporting
-            </Button>
+            </Button> */}
           </div>
         </div>
         <div className='px-3 py-2'>

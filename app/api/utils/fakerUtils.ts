@@ -3,7 +3,6 @@ import path from "path"
 import util from "util"
 import { faker } from "@faker-js/faker"
 import { addDataToJSON, getJSONContents } from './serverUtils'
-import testDataConfigs, { TableName } from '@/data/testData'
 import { z } from 'zod'
 
 const websitePostfixes = [ '.js', '.com', '.io' ]
@@ -445,14 +444,14 @@ export const getRandomForeignIds = async (tableName: string, numEntries: number)
   
 // }
 
-export const createTestDataTable = async (
+export const createTestTableData = async (
   tableName: string, 
   numEntries = 100, 
   reset = false
 ) => {
   const currSchema = require(`@/app/api/${tableName}/schemas.ts`)
   type CurrType = z.infer<typeof currSchema.schema>;
-  console.log('*** CurrType\n', currSchema.schema)
+  console.log('*** CurrConfig\n', currSchema.dbConfig)
 
   const { 
     createNew, 
@@ -464,9 +463,12 @@ export const createTestDataTable = async (
   const tableUrl = path.join(process.cwd(), `data/testData/${tableName}.json`)
   const currData = reset ? [] : await getJSONContents(tableUrl)
   // console.log('*** tableName at root\n', tableName)
+  console.log('*** currData.length - ', currData?.length)
 
   const newData = Array.from({ length: numEntries }, createNew)
   const tableData = [...currData, ...newData]
+
+  console.log('*** tableData.length - ', tableData?.length)
 
   
   await addDataToJSON(tableUrl, tableData)
@@ -492,4 +494,5 @@ export const createTestDataTable = async (
   // fs.writeFileSync(tableUrl, JSON.stringify(tableData, null, 2))
 
   console.log(`✅ ${tableName} Table data generated.`)
+  return tableData
 }

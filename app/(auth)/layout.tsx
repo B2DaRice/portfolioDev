@@ -11,7 +11,7 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   return (
-    <main className='flex min-h-screen justify-center pt-20 sm:items-center sm:pt-0'>
+    <main className='flex h-screen w-screen justify-center pt-20 sm:items-center sm:pt-0 overflow-hidden'>
       {children}
     </main>
   )

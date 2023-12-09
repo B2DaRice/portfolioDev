@@ -17,6 +17,7 @@ export const orgsTableColumns: TableColumns = [
   {
     accessorKey: 'id',
     header: 'ID',
+    defaultHidden: true
   },
   {
     accessorKey: 'name',
@@ -24,7 +25,7 @@ export const orgsTableColumns: TableColumns = [
   },
   {
     accessorKey: 'website',
-    header: 'Contact Email',
+    header: 'Website',
   },
   {
     accessorKey: 'addressId',
@@ -56,46 +57,46 @@ export const orgsTableColumns: TableColumns = [
   {
     accessorKey: 'propertyIds',
     header: 'Properties',
-    cell: ({ getValue }) => (
-      <div className='flex flex-col gap-1 overflow-auto' style={{ maxHeight: '75px' }}>
-        {
-          getValue().map((id: string, index: number) => (
-            <span
-              key={`property-${index}`}
-              className='mr-2 whitespace-nowrap p-1 opacity-60 border rounded-sm text-xs cursor-pointer hover:opacity-100'
-              onClick={(event) => {
-                event.stopPropagation()
-                console.log(`Id clicked: ${id}`)
-              }}
-            >
-              {id}
-            </span>
-          ))
-        }
-      </div>
-    )
+    // cell: ({ getValue }) => (
+    //   <div className='flex flex-col gap-1 overflow-auto' style={{ maxHeight: '75px' }}>
+    //     {
+    //       getValue().map((id: string, index: number) => (
+    //         <span
+    //           key={`property-${index}`}
+    //           className='mr-2 whitespace-nowrap p-1 opacity-60 border rounded-sm text-xs cursor-pointer hover:opacity-100'
+    //           onClick={(event) => {
+    //             event.stopPropagation()
+    //             console.log(`Id clicked: ${id}`)
+    //           }}
+    //         >
+    //           {id}
+    //         </span>
+    //       ))
+    //     }
+    //   </div>
+    // )
   },
   {
     accessorKey: 'integrationIds',
     header: 'Integrations',
-    cell: ({ getValue }) => (
-      <div className='flex flex-col gap-1 overflow-auto' style={{ maxHeight: '75px' }}>
-        {
-          getValue().map((id: string, index: number) => (
-            <span
-              key={`property-${index}`}
-              className='mr-2 whitespace-nowrap p-1 opacity-60 border rounded-sm text-xs cursor-pointer hover:opacity-100'
-              onClick={(event) => {
-                event.stopPropagation()
-                console.log(`Id clicked: ${id}`)
-              }}
-            >
-              {id}
-            </span>
-          ))
-        }
-      </div>
-    )
+    // cell: ({ getValue }) => (
+    //   <div className='flex flex-col gap-1 overflow-auto' style={{ maxHeight: '75px' }}>
+    //     {
+    //       getValue().map((id: string, index: number) => (
+    //         <span
+    //           key={`property-${index}`}
+    //           className='mr-2 whitespace-nowrap p-1 opacity-60 border rounded-sm text-xs cursor-pointer hover:opacity-100'
+    //           onClick={(event) => {
+    //             event.stopPropagation()
+    //             console.log(`Id clicked: ${id}`)
+    //           }}
+    //         >
+    //           {id}
+    //         </span>
+    //       ))
+    //     }
+    //   </div>
+    // )
   },
   {
     accessorKey: 'actions',
