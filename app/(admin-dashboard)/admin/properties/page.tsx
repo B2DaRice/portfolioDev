@@ -3,7 +3,7 @@
 import { propertiesTableColumns, filterConfig } from '@/data/properties/tableConfigs'
 import { PropertiesDataType } from '@/types/Properties'
 import { useState } from 'react'
-import { ListPage, PageActionType } from '@/components/dashboard/ListPage'
+import { ListPage, PageActionType } from '@/components/ListPage'
 import { PlusCircle } from 'lucide-react'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'

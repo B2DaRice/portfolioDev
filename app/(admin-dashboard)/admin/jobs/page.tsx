@@ -1,7 +1,7 @@
 "use client"
 
-import { ListPage, PageActionType } from '@/components/dashboard/ListPage'
-import { jobTableColumns, filterConfig } from '@/data/jobs/tableConfigs'
+import { ListPage, PageActionType } from '@/components/ListPage'
+import { tableColumns, filterConfig } from '@/app/(admin-dashboard)/admin/jobs/tableConfigs'
 import { JobDataType } from '@/types/Job'
 import { useState } from 'react'
 import { PlusCircle } from 'lucide-react'
@@ -40,11 +40,11 @@ const JobsPage = () => {
 
   return (
     <ListPage
-      title='All Jobs'
+      title="All Jobs"
       subtitle='Click a job to view more information'
       pageActions={pageActionsConfig}
       filterConfig={filterConfig}
-      columns={jobTableColumns}
+      columns={tableColumns}
       dataApiPath='/api/jobs'
       singlePagePath='admin/job/'
       data={jobs}

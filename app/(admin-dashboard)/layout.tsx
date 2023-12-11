@@ -1,6 +1,6 @@
 'use client'
 
-import { Fragment, useContext, useState } from 'react'
+import { Fragment, useContext, useEffect, useState } from 'react'
 import { GlobalContext } from '@/data/globalContext'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
@@ -16,12 +16,15 @@ import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { Switch } from '@/components/ui/switch'
 import { useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
-import Logo from '@/components/shared/Logo'
+import Logo from '@/components/Logo'
+import { ListChecks, Users2 } from 'lucide-react'
 
 const navigation = [
-  { name: 'Jobs', href: '/admin/jobs', icon: BriefcaseIcon },
-  { name: 'Organizations', href: '/admin/organizations', icon: BuildingOfficeIcon },
-  { name: 'Users', href: '/admin/users', icon: UsersIcon },
+  // { name: 'Jobs', href: '/admin/jobs', icon: BriefcaseIcon },
+  { name: 'Orgs', href: '/admin/orgs', icon: BuildingOfficeIcon },
+  { name: 'Addresses', href: '/admin/addresses', icon: ListChecks },
+  { name: 'Contacts', href: '/admin/contacts', icon: Users2 },
+  // { name: 'Users', href: '/admin/users', icon: UsersIcon },
 ]
 
 const userNavigation = [
@@ -40,8 +43,8 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const currPath = usePathname()
 
   return (
-    <div>
-      <div>
+    <div className='h-full w-full overflow-hidden'>
+      <div className='h-full w-full overflow-hidden'>
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
             as='div'
@@ -151,9 +154,9 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         </Transition.Root>
 
         {/* Static sidebar for desktop */}
-        <div className='hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col'>
+        <div className='hidden h-full lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col'>
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className='flex grow flex-col gap-y-5 overflow-y-auto border-r px-6 pb-4'>
+          <div className='h-full flex flex-col gap-y-5 border-r px-6 pb-4'>
             <div className='flex h-16 shrink-0 items-center'>
               <Logo src='' />
             </div>
@@ -231,7 +234,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           </div>
         </div>
 
-        <div className='lg:pl-72'>
+        <div className='lg:pl-72 h-full w-full overflow-hidden'>
           <div className='sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8'>
             <button
               type='button'
@@ -331,7 +334,11 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
             </div>
           </div>
 
-          <div className='container py-10 flex flex-row flex-grow'>{children}</div>
+          <div className='h-full w-full overflow-y-auto'>
+            <div className='container py-10 pb-24 flex flex-row flex-grow'>
+              {children}
+            </div>
+          </div>
         </div>
       </div>
     </div>

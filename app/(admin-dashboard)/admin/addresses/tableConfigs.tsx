@@ -2,39 +2,35 @@
 
 import { TableColumns, FilterConfigType } from '@/components/table/DataTable'
 import { DataTableRowActions } from '@/components/table/DataTableRowActions'
-import { userStatuses } from './dropdownValues'
+import states from '@/data/states'
 
 export const filterConfig: FilterConfigType[] = [
   {
-    accessorKey: 'name',
+    accessorKey: 'street',
     type: 'text',
-    label: 'User Search'
+    label: 'Address Search'
   },
   {
-    accessorKey: 'status',
+    accessorKey: 'state',
     type: 'select',
-    label: 'Status',
-    options: userStatuses
-  },
+    label: 'Filter By State',
+    options: Object.entries(states).map(([abbr, name]) => ({
+      label: abbr,
+      value: abbr,
+    })),
+  }
 ]
 
 
-export const usersTableColumns: TableColumns = [
+export const tableColumns: TableColumns = [
   {
     accessorKey: 'id',
     header: 'ID',
+    defaultHidden: true
   },
   {
-    accessorKey: 'name',
-    header: 'Full Name',
-  },
-  {
-    accessorKey: 'email',
-    header: 'Email',
-  },
-  {
-    accessorKey: 'phone',
-    header: 'Phone #',
+    accessorKey: 'street',
+    header: 'Street Address',
   },
   {
     accessorKey: 'city',
@@ -43,16 +39,13 @@ export const usersTableColumns: TableColumns = [
   {
     accessorKey: 'state',
     header: 'State',
-  },
-  {
-    accessorKey: 'status',
-    header: 'Status',
-    cell: ({ getValue }) => {
-      return userStatuses.find(({ value }) => value === getValue())?.label || getValue()
-    },
     filterFn: (row, id, value: string) => {
       return value.includes(row.getValue(id))
     },
+  },
+  {
+    accessorKey: 'zipCode',
+    header: 'Zip Code',
   },
   {
     accessorKey: 'actions',
