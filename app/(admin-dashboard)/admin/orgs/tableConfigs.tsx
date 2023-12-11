@@ -13,7 +13,7 @@ export const filterConfig: FilterConfigType[] = [
 ]
 
 
-export const orgsTableColumns: TableColumns = [
+export const tableColumns: TableColumns = [
   {
     accessorKey: 'id',
     header: 'ID',
@@ -28,8 +28,8 @@ export const orgsTableColumns: TableColumns = [
     header: 'Website',
   },
   {
-    accessorKey: 'addressId',
-    header: 'Address',
+    accessorKey: 'billingAddressId',
+    header: 'Billing Address',
   },
 
   {

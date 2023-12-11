@@ -7,21 +7,9 @@ import { z } from 'zod'
 
 const websitePostfixes = [ '.js', '.com', '.io' ]
 
-export type FakeDataRootKeys = 'address' | 'person' | 'dates' | 'foreignKey' | 'num' | 'str' 
-
-export type FakeAddressKeys = 'street' | 'city' | 'state' | 'zipCode'
-export type FakePersonKeys = 'firstName' | 'lastName' | 'fullName' | 'email' | 'phone'
-export type FakeOrgKeys = 'orgName' | 'orgContact' | 'orgWebsite'
-export type FakeNumberKeys = 'randomNumber' | 'randomFloat'
-export type FakeStringKeys = 'website' | 'customString'
-export type FakeDateKeys = 'createdAt' | 'updatedAt' | 'dueDate' | 'randomDate'
-export type FakeDataSubTypeKeys = 
-  | FakeAddressKeys 
-  | FakePersonKeys 
-  | FakeOrgKeys 
-  | FakeNumberKeys 
-  | FakeStringKeys 
-  | FakeDateKeys
+export type FakeDataKeys = 'address' | 'person' | 'dates' | 'foreignKey' | 'num' | 'str' 
+export type FakeDateDataKeys = 'createdAt' | 'updatedAt' | 'startDate' | 'dueDate'
+ 
 
 type ForeignKeyMeta = {
   table: string,
@@ -40,7 +28,7 @@ type FakeDataMeta = {
 
 export type FakeDataConfig<T> = {
   dataKey: keyof T,
-  metaDataType: FakeDataRootKeys,
+  metaDataType: FakeDataKeys,
   // metaDataSubType?: FakeAddressKeys | FakePersonKeys | FakeOrgKeys | FakeNumberKeys | FakeStringKeys,
   metaDataConfig?: FakeDataMeta
 }
@@ -76,32 +64,54 @@ export const generateWebsite = (domain = '') => {
   return `${url.split(' ').join('_')}${faker.helpers.arrayElement(websitePostfixes)}`
 }
 
-export const generateDate = (dataKey: FakeDateKeys, { minMax, dateType }: FakeDataMeta) => {
+type CurrentDates = {
+  createdAt?: number,
+  updatedAt?: number,
+  startDate?: number,
+  dueDate?: number,
+}
+
+export const generateDate = (
+  dataKey: FakeDateDataKeys, 
+  currDBColConfig: FakeDataMeta,
+  currDates: CurrentDates
+) => {
+  const { minMax, dateType } = currDBColConfig
+  const { createdAt, dueDate } = currDates
   const firstDate = new Date('2023-01-01')
   const today = new Date()
   const lastDate = new Date(new Date().getFullYear() + 1)
-  const createdAtDate = faker.date.between({ from: firstDate, to: today })
+  const createdAtDate = createdAt ? new Date(createdAt) : faker.date.between({ from: firstDate, to: today })
 
-  const generators = {
-    createdAt: () => {
-      return createdAtDate.getTime()
-    },
-    updatedAt: () => {
-      return faker.date.between({ from: createdAtDate, to: today }).getTime()
-    },
-    dueDate: () => {
-      return faker.date.between({ from: createdAtDate, to: new Date().setMonth(today.getMonth() + 3)}).getTime()
-    },
-    randomDate: () => {
-      return !dateType
-        ? faker.date.between({ from: firstDate, to: lastDate}).getTime()
-        : dateType === 'past'
-          ? faker.date.between({ from: firstDate, to: today }).getTime()
-          : faker.date.between({ from: today.toISOString(), to: lastDate}).getTime()
+  const generate = () => {
+    switch (dataKey) {
+      case 'createdAt': 
+        return createdAtDate.getTime()
+
+      case 'updatedAt':
+        return faker.date.between({ from: createdAtDate, to: today }).getTime()
+
+      case 'startDate':
+        let maxDate = dueDate 
+          ? new Date(dueDate) 
+          : faker.date.between({ from: createdAtDate, to: new Date().setMonth(today.getMonth() + 2)})
+
+        return faker.date.between({ from: createdAtDate, to: new Date().setMonth(maxDate.getDate() + 7)}).getTime()
+
+      case 'dueDate':
+        return faker.date.between({ from: createdAtDate, to: new Date().setMonth(today.getMonth() + 2)}).getTime()
+
+      default:
     }
+
+    return !dateType
+      ? faker.date.between({ from: minMax?.[0] ?? firstDate, to: minMax?.[0] ?? lastDate}).getTime()
+      : dateType === 'past'
+        ? faker.date.between({ from: firstDate, to: today }).getTime()
+        : faker.date.between({ from: today.toISOString(), to: lastDate}).getTime()
   }
 
-  return generators[dataKey]()
+  return generate()
 }
 
 export const createForeignData = async (dbConfig: FakeTableConfig<any>, newData: any[] = []) => {

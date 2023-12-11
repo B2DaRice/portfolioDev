@@ -6,7 +6,7 @@ export const schema = z.object({
   id: z.string(),
   name: z.string().optional(),
   website: z.string().optional(),
-  addressId: z.string().optional(),
+  billingAddressId: z.string().optional(),
   contactIds: z.array(z.string()).optional(),
   referralIds: z.array(z.string()).optional(),
   propertyIds: z.array(z.string()).optional(),
@@ -34,7 +34,7 @@ export const dbConfig: FakeTableConfig<TypeFromSchema> = [
     metaDataType: 'str',
   },
   {
-    dataKey: 'addressId',
+    dataKey: 'billingAddressId',
     metaDataType: 'foreignKey',
     metaDataConfig: {
       foreignTable: {
@@ -110,7 +110,6 @@ export const createNew = (newId?: string) => {
 
     if (create) {
       if (numEntriesMinMax) {
-        // const numEntries = faker.number.int({ min: numEntriesMinMax[0], max: numEntriesMinMax[1] })
         const newForeignKeys = Array.from({ length: numEntries }, () => createNewId())
         // @ts-ignore: next-line
         newOrg[dataKey] = newForeignKeys

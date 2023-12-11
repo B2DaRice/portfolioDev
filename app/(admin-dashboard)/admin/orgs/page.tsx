@@ -4,7 +4,7 @@ import { ListPage, PageActionType } from '@/components/ListPage'
 // import { organizationsTableColumns, filterConfig } from '@/data/organizations/tableConfigs'
 // import { OrganizationDataType } from '@/types/Organizations'
 import { useState } from 'react'
-import { orgsTableColumns, filterConfig } from './tableConfigs'
+import { tableColumns, filterConfig } from './tableConfigs'
 import { TypeFromSchema } from '@/app/api/orgs/schemas'
 
 const AdminOrgsPage = () => {
@@ -18,7 +18,7 @@ const AdminOrgsPage = () => {
       subtitle='Click an organization to view more information'
       pageActions={pageActionsConfig}
       filterConfig={filterConfig}
-      columns={orgsTableColumns}
+      columns={tableColumns}
       dataApiPath='/api/orgs'
       singlePagePath='admin/orgs/'
       data={orgs}

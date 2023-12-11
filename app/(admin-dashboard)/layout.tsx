@@ -17,11 +17,14 @@ import { Switch } from '@/components/ui/switch'
 import { useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Logo from '@/components/Logo'
+import { ListChecks, Users2 } from 'lucide-react'
 
 const navigation = [
-  { name: 'Jobs', href: '/admin/jobs', icon: BriefcaseIcon },
+  // { name: 'Jobs', href: '/admin/jobs', icon: BriefcaseIcon },
   { name: 'Orgs', href: '/admin/orgs', icon: BuildingOfficeIcon },
-  { name: 'Users', href: '/admin/users', icon: UsersIcon },
+  { name: 'Addresses', href: '/admin/addresses', icon: ListChecks },
+  { name: 'Contacts', href: '/admin/contacts', icon: Users2 },
+  // { name: 'Users', href: '/admin/users', icon: UsersIcon },
 ]
 
 const userNavigation = [

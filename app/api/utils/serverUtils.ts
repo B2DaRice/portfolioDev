@@ -67,7 +67,7 @@ export const getInitTableData = async (tableName: string) => {
   const url = `data/testData/${tableName}.json`
   const filePath = path.join(process.cwd(), url)
   let currData = await getJSONContents(filePath)
-  // console.log('*** currData from getInitTableData\n', currData)
+  console.log('*** currData from getInitTableData\n', currData)
   if (!currData.length) {
     currData = await createTestTableData(tableName, 10, true)
     // currData = await getJSONContents(filePath)

@@ -11,7 +11,6 @@ import { TABLE_NAMES } from '@/app/api/types/database'
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
-    // const CurrSchema = z.
     console.log('*** requestUrl params:\n', searchParams)
     
     // let orgs = await getJSONContents(path.join(process.cwd(), "data/testData/orgs.json"))

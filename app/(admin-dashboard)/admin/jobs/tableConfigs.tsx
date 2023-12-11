@@ -4,7 +4,7 @@ import { TableColumns, FilterConfigType } from '@/components/table/DataTable'
 import { PlusCircle } from 'lucide-react'
 import { DataTableRowActions } from '@/components/table/DataTableRowActions'
 import { formatCurrency } from '@/lib/utils'
-import { jobStatuses, startDatePresets } from './dropdownValues'
+import { jobStatuses, startDatePresets } from '../../../../data/jobs/dropdownValues'
 
 export const filterConfig: FilterConfigType[] = [
   {
@@ -33,7 +33,7 @@ export const filterConfig: FilterConfigType[] = [
   }
 ]
 
-export const jobTableColumns: TableColumns = [
+export const tableColumns: TableColumns = [
   {
     accessorKey: 'id',
     header: 'Job ID',

@@ -20,6 +20,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { Separator } from "@/components/ui/separator"
+import { ChevronDown, ChevronUp } from 'lucide-react'
 
 interface DataTableFacetedFilterProps<TData, TValue> {
   column?: Column<TData, TValue>
@@ -38,12 +39,17 @@ export function DataTableFacetedFilter<TData, TValue>({
   options,
   filterIcon
 }: DataTableFacetedFilterProps<TData, TValue>) {
+  const [isOpen, setIsOpen] = React.useState(false)
   const facets = column?.getFacetedUniqueValues()
   const selectedValues = new Set(column?.getFilterValue() as string[])
 
+  const handleClick = (event: any) => {
+    setIsOpen(!isOpen)
+  }
+
   return (
     <Popover>
-      <PopoverTrigger asChild>
+      <PopoverTrigger onClick={handleClick} asChild>
         <Button variant="outline" size="sm" className="h-8 border-dashed text-muted-foreground">
           {filterIcon && 
             <span className='pr-3'>{filterIcon}</span>
@@ -82,6 +88,12 @@ export function DataTableFacetedFilter<TData, TValue>({
               </div>
             </>
           )}
+          {!isOpen ? (
+            <ChevronDown className='pl-2'/>
+          ) : (
+            <ChevronUp className='pl-2'/>
+          )}
+          
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0" align="start">

@@ -39,6 +39,6 @@ export const createNew = (newId?: string): TypeFromSchema => ({
   id: newId ?? createNewId(),
   street: faker.location.streetAddress(),
   city: faker.location.city(),
-  state: faker.location.state(),
+  state: faker.location.state({ abbreviated: true }),
   zipCode: faker.location.zipCode(),
 })
