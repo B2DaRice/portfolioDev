@@ -1,11 +1,7 @@
-import fs from "fs"
 import path from "path"
-import util from "util"
 import { faker } from "@faker-js/faker"
 import { addDataToJSON, getJSONContents } from './serverUtils'
-import { z } from 'zod'
-
-const websitePostfixes = [ '.js', '.com', '.io' ]
+import { TableName } from '../types/database'
 
 export type FakeDataKeys = 'address' | 'person' | 'dates' | 'foreignKey' | 'num' | 'str' 
 export type FakeDateDataKeys = 'createdAt' | 'updatedAt' | 'startDate' | 'dueDate'
@@ -17,7 +13,7 @@ type ForeignKeyMeta = {
   create?: boolean,
 }
 
-type FakeDataMeta = {
+export type FakeDataMeta = {
   value?: any,
   numEntriesMinMax?: [number, number],
   foreignTable?: ForeignKeyMeta,
@@ -29,17 +25,10 @@ type FakeDataMeta = {
 export type FakeDataConfig<T> = {
   dataKey: keyof T,
   metaDataType: FakeDataKeys,
-  // metaDataSubType?: FakeAddressKeys | FakePersonKeys | FakeOrgKeys | FakeNumberKeys | FakeStringKeys,
   metaDataConfig?: FakeDataMeta
 }
 
 export type FakeTableConfig<T> = FakeDataConfig<T>[]
-
-// type FakeDataGeneratorType = {
-//   [dataType in FakeDataRootKeys]?: {
-//     [dataSubType in FakeDataSubTypeKeys]?: (dataConfig?: FakeDataMeta) => void
-//   }
-// }
 
 export const rollOptional = (probabilityMax = 3) => {
   const nullRandom = faker.number.int({ min: 1, max: probabilityMax })
@@ -54,8 +43,9 @@ export const createNewId = (): string => {
 }
 
 export const generateNumber = (numMinMax: [number, number], useFloat = false) => {
-  const generator = useFloat ? faker.number.float : faker.number.int
-  return generator({ min: numMinMax[0], max: numMinMax[1] })
+  const newNum = faker.number.int({ min: numMinMax[0], max: numMinMax[1] })
+  console.log('*** newNum\n', newNum)
+  return useFloat ? newNum/100 : newNum
 }
 
 export const generateWebsite = (domain = '') => {
@@ -74,7 +64,7 @@ type CurrentDates = {
 export const generateDate = (
   dataKey: FakeDateDataKeys, 
   currDBColConfig: FakeDataMeta,
-  currDates: CurrentDates
+  currDates: CurrentDates = {}
 ) => {
   const { minMax, dateType } = currDBColConfig
   const { createdAt, dueDate } = currDates
@@ -83,7 +73,7 @@ export const generateDate = (
   const lastDate = new Date(new Date().getFullYear() + 1)
   const createdAtDate = createdAt ? new Date(createdAt) : faker.date.between({ from: firstDate, to: today })
 
-  const generate = () => {
+  const generate = (): number => {
     switch (dataKey) {
       case 'createdAt': 
         return createdAtDate.getTime()
@@ -114,7 +104,7 @@ export const generateDate = (
   return generate()
 }
 
-export const createForeignData = async (dbConfig: FakeTableConfig<any>, newData: any[] = []) => {
+export async function createForeignData<T> (dbConfig: FakeTableConfig<T>, newData: T[] = []) {
   dbConfig
     .filter(({ metaDataType, metaDataConfig }) => ( 
       metaDataConfig?.foreignTable?.create && metaDataType === 'foreignKey'
@@ -124,366 +114,97 @@ export const createForeignData = async (dbConfig: FakeTableConfig<any>, newData:
       const foreignTableUrl = path.join(process.cwd(), `data/testData/${table}.json`)
       const { createNew } = require(`@/app/api/${table}/schemas.ts`)
       const onlyIds = newData
-        .map((item: any) => (item[dataKey]))
+        .map((item: T) => (item[dataKey]))
         .flat()
 
       const newDataFromIds = Array.from(onlyIds, (newId) => createNew(newId))
-      // onlyIds.forEach((item) => {
-      //   const newDataFromIds = Array.from(item[dataKey], (newId) => createNew(newId))
-        addDataToJSON(foreignTableUrl, newDataFromIds)
-        console.log(`✅ ${table} Table foreign data generated.`)
-      // })
+
+      addDataToJSON(foreignTableUrl, newDataFromIds)
+      console.log(`✅ ${table} Table foreign data generated.`)
     })
 }
 
 export const getRandomForeignIds = async (tableName: string, numEntries: number) => {
   const foreignDataUrl = path.join(process.cwd(), `data/testData/${tableName}.json`)
-  const randomIndex = () => faker.number.int({ min: 0, max: numEntries })
+  const randomIndex = (max: number) => faker.number.int({ min: 0, max })
 
   const foreignData = await getJSONContents(foreignDataUrl)
     .then((data) => (
-      numEntries < 0
-        ? data[randomIndex()].id
-        : Array
-          .from({ length: numEntries }, () => data[randomIndex()])
-          .map((item: any) => item.id)
+      numEntries > 1
+        ? new Set(Array
+          .from({ length: numEntries }, () => data[randomIndex(data.length - 1)])
+          .map((item: any) => item.id))
+        : data[randomIndex(data.length - 1)].id
     ))
   
   return foreignData || []
 }
 
-// export const createDBData = (
-//   filePath: string,
-//   generator: () => any
-// ) => {
-//   let result = generator()
-//   addDataToJSON(filePath, result)
-//   return result
-// }
+export function addForeignIds<T> (
+  newData: T,
+  dbConfig: FakeTableConfig<T>, 
+  NULL_PROBABILITY_MAX = 3
+): T {
+  const foreignKeys = dbConfig.filter(({ metaDataType, metaDataConfig }) => {
+    const doAdd = !metaDataConfig?.optional || rollOptional(NULL_PROBABILITY_MAX)
+    return doAdd && metaDataType === 'foreignKey'
+  });
 
-// export const batchCreateDBData = (
-//   filePath: string,
-//   generator: () => any, 
-//   batchSize: number,
-// ) => {
-//   let results = Array.from({ length: batchSize }, generator)
-//   return results
-// }
+  foreignKeys.forEach(async ({ dataKey, metaDataConfig }) => {
+    const { foreignTable, numEntriesMinMax } = metaDataConfig!;
+    const { table: foreignTableName, create } = foreignTable!;
+    console.log('*** numEntriesMinMax - ', numEntriesMinMax)
+    const numEntries = numEntriesMinMax ? faker.number.int({ min: numEntriesMinMax[0], max: numEntriesMinMax[1] }) : 1
+    console.log('*** numEntries - ', numEntries)
 
-// export const generateFakeDataSync = (currConfig: any[]) => {
-//   const firstDate = '2023-01-01'
-//   const today = new Date()
-//   const lastDate = new Date(new Date().getFullYear() + 1).toISOString()
-//   const createdAtDate = faker.date.between({ from: firstDate, to: today.toISOString()})
-//   const updatedAtDate = faker.date.between({ from: createdAtDate, to: today.toISOString()})
+    if (create) {
+      if (numEntries > 1) {
+        const newForeignKeys = Array.from({ length: numEntries }, () => createNewId())
+        // @ts-ignore: next-line
+        newData[dataKey] = newForeignKeys
+      } else {
+        // @ts-ignore: next-line
+        newData[dataKey] = createNewId()
+      }
+    } else {
+      console.log('*** adding foreign entries - ', numEntries)
+      const foreignIds = await getRandomForeignIds(foreignTableName, numEntries)
+      // @ts-ignore: next-line
+      newData[dataKey] = foreignIds || []
+    }
+  });
 
-//   const generator: FakeDataGeneratorType = {
-//     address: {
-//       street: () => {
-//         return faker.location.streetAddress()
-//       },
-//       city: () => {
-//         return faker.location.city()
-//       },
-//       state: () => {
-//         return faker.location.state()
-//       },
-//       zipCode: () => {
-//         return faker.location.zipCode()
-//       },
-//     },
-//     person: {
-//       firstName: () => {
-//         return faker.person.firstName()
-//       },
-//       lastName: () => {
-//         return faker.person.lastName()
-//       },
-//       fullName: () => {
-//         return faker.person.fullName()
-//       },
-//       email: () => {
-//         return faker.internet.email()
-//       },
-//       phone: () => {
-//         return faker.phone.number('###-###-####')
-//       },
-//     },
-//     org: {
-//       orgName: () => {
-//         return `${faker.hacker.adjective().replace(/^./, (letter: any) => letter.toUpperCase())} ${faker.hacker.noun().replace(/^./, (letter: any) => letter.toUpperCase())}`
-//       },
-//       // orgContact: (config) => {
-//       //   return getRandomDataFromTable(config!)
-//       // },
-//       orgWebsite: () => {
-//         return `${faker.hacker.adjective().split(' ').join('_')}${faker.helpers.arrayElement(websitePostfixes)}`
-//       }
-//     },
-//     otherNumber: {
-//       randomNumber: (config) => {
-//         const { minMax } = config || { minMax: [1, 100] }
-//         return faker.number.int({ min: minMax![0], max: minMax![1] })
-//       },
-//       randomFloat: (config) => {
-//         const { minMax } = config || { minMax: [1, 100] }
-//         return faker.number.float({ min: minMax![0], max: minMax![1] })
-//       },
-//     },
-//     otherString: {
-//       // foreignKey: async (config) => {
-//       //   if (!config?.foreignTable) {
-//       //     console.log(`ERROR: foreignTable config not provided for foreignKey data type`)
-//       //     return
-//       //   }
-//       //   const newDataGen = await getRandomDataFromTable(config)
-//       //   console.log('*** newDataGen:\n', newDataGen)
-//       //   return newDataGen
-//       // },
-//       website: () => {
-//         return `${faker.hacker.adjective().split(' ').join('_')}${faker.helpers.arrayElement(websitePostfixes)}`
-//       },
-//       customString: (config) => {
-//         return `${config?.value || ''}`
-//       },
-//     },
-//     dates: {
-//       createdAt: () => {
-//         return createdAtDate.toUTCString()
-//       },
-//       updatedAt: () => {
-//         return updatedAtDate.toUTCString()
-//       },
-//       dueDate: () => {
-//         return faker.date.between({ from: createdAtDate, to: new Date().setMonth(today.getMonth() + 3)}).toUTCString()
-//       },
-//       randomDate: (config) => {
-//         const { dateType = '' } = config!
-//         return !dateType
-//           ? faker.date.between({ from: firstDate, to: lastDate}).toUTCString()
-//           : dateType === 'past'
-//             ? faker.date.between({ from: firstDate, to: today.toISOString()}).toUTCString()
-//             : faker.date.between({ from: today.toISOString(), to: lastDate}).toUTCString()
-//       }
-//     }
-//   }
-// }
+  return newData;
+}
 
-// const getRandomDataFromTable = async ({ foreignTable, numEntriesMinMax }: FakeDataMeta) => {
-//   const { 
-//     table, 
-//     dataKey = 'id', 
-//     create = false, 
-//     optional = false 
-//   } = foreignTable!
-
-//   const foreignDataUrl = path.join(process.cwd(), `data/testData/${table}.json`)
-//   let foreignData = await getJSONContents(foreignDataUrl)
-//   if (!foreignData.length && !create && !optional) {
-//     console.log('ERROR: No data found in foreign table: "' + foreignTable + '"')
-//     return
-//   }
-
-//   let randomIndex = (max = 0) => faker.number.int({ min: 0, max })
-//   const nullRandom = faker.number.int({ min: 1, max: 3 })
-//   const nullProbability = 3
-
-//   let result: any = null
-//   if (!optional || nullRandom/nullProbability !== 0) {
-
-//     if (numEntriesMinMax) {
-//       const numEntries = faker.number.int({ min: numEntriesMinMax[0], max: numEntriesMinMax[1] })
-
-//       result = Array.from({ length: numEntries }, async () => {
-//         let assosiciatedItem: any = ''
-//         if (create) {
-//           const newItem = await generateTestData(table as TableName, 1) || []
-//           const returnedItem = await addDataToJSON(foreignDataUrl, [newItem]) || []
-//           // console.log('*** returnedItem:\n', returnedItem)
-//           assosiciatedItem = returnedItem[0]?.[dataKey] || null
-//         } else {
-//           assosiciatedItem = foreignData[randomIndex(foreignData.length - 1)]
-//         }
-
-//         return assosiciatedItem[dataKey]
-//       }).filter((item) => !!item)
-
-//     } else if (create) {
-//       const newItem = await generateTestData(table as TableName, 1) || []
-//       const returnedItem = await addDataToJSON(foreignDataUrl, [newItem]) || []
-
-//       console.log('*** newItem:\n', returnedItem)
-//       result = newItem[0]?.[dataKey] || null
-
-//     } else {
-//       result = foreignData[randomIndex()]?.[dataKey] || null
-//     }
-//   }
-//   console.log('*** result from foreign table:\n', result)
-//   return result
-// }
-
-// const newId = () => {
-//   const alpha = faker.string.alpha({ length: 3 }).toUpperCase()
-//   const numeric = faker.number.int({ min: 10000, max: 99999 })
-  
-//   return `${alpha}${numeric}`
-// }
-
-// const generateTestData = async (currTable: TableName, numEntries = 100) => {
-//   const currConfig = testDataConfigs[currTable]
-//   const firstDate = '2023-01-01'
-//   const today = new Date()
-//   const lastDate = new Date(new Date().getFullYear() + 1).toISOString()
-//   const createdAtDate = faker.date.between({ from: firstDate, to: today.toISOString()})
-//   const updatedAtDate = faker.date.between({ from: createdAtDate, to: today.toISOString()})
-
-//   // console.log('*** currConfig:\n', currTable)
-
-//   const generate = async () => {
-//     const generator: FakeDataGeneratorType = {
-//       address: {
-//         street: () => {
-//           return faker.location.streetAddress()
-//         },
-//         city: () => {
-//           return faker.location.city()
-//         },
-//         state: () => {
-//           return faker.location.state()
-//         },
-//         zipCode: () => {
-//           return faker.location.zipCode(
-//         },
-//       },
-//       person: {
-//         firstName: () => {
-//           return faker.person.firstName()
-//         },
-//         lastName: () => {
-//           return faker.person.lastName()
-//         },
-//         fullName: () => {
-//           return faker.person.fullName()
-//         },
-//         email: () => {
-//           return faker.internet.email()
-//         },
-//         phone: () => {
-//           return faker.phone.number('###-###-####')
-//         },
-//       },
-//       org: {
-//         orgName: () => {
-//           return `${faker.hacker.adjective().replace(/^./, (letter: any) => letter.toUpperCase())} ${faker.hacker.noun().replace(/^./, (letter: any) => letter.toUpperCase())}`
-//         },
-//         // orgContact: (config) => {
-//         //   return getRandomDataFromTable(config!)
-//         // },
-//         orgWebsite: () => {
-//           return `${faker.hacker.adjective().split(' ').join('_')}${faker.helpers.arrayElement(websitePostfixes)}`
-//         }
-//       },
-//       otherNumber: {
-//         randomNumber: (config) => {
-//           const { minMax } = config || { dateMinMax: [1, 100] }
-//           return faker.number.int({ min: minMax![0], max: minMax![1] })
-//         },
-//         randomFloat: (config) => {
-//           const { minMax } = config || { dateMinMax: [1, 100] }
-//           return faker.number.float({ min: minMax![0], max: minMax![1] })
-//         },
-//       },
-//       otherString: {
-//         foreignKey: async (config) => {
-//           if (!config?.foreignTable) {
-//             console.log(`ERROR: foreignTable config not provided for foreignKey data type`)
-//             return
-//           }
-//           const newDataGen = await getRandomDataFromTable(config)
-//           console.log('*** newDataGen:\n', newDataGen)
-//           return newDataGen
-//         },
-//         website: () => {
-//           return `${faker.hacker.adjective().split(' ').join('_')}${faker.helpers.arrayElement(websitePostfixes)}`
-//         },
-//         customString: (config) => {
-//           return `${config?.value || ''}`
-//         },
-//       },
-//       dates: {
-//         createdAt: () => {
-//           return createdAtDate.toUTCString()
-//         },
-//         updatedAt: () => {
-//           return updatedAtDate.toUTCString()
-//         },
-//         dueDate: () => {
-//           return faker.date.between({ from: createdAtDate, to: new Date().setMonth(today.getMonth() + 3)}).toUTCString()
-//         },
-//         randomDate: (config) => {
-//           const { dateType = '' } = config!
-//           return !dateType
-//             ? faker.date.between({ from: firstDate, to: lastDate}).toUTCString()
-//             : dateType === 'past'
-//               ? faker.date.between({ from: firstDate, to: today.toISOString()}).toUTCString()
-//               : faker.date.between({ from: today.toISOString(), to: lastDate}).toUTCString()
-//         }
-//       }
-//     }
-
-//     const newData = Array.from({ length: numEntries }, async () => {
-//       let newData: { [dataKey: string]: any } = {
-//         id: newId()
-//       }
-//       currConfig.forEach(({ dataKey = '', metaDataType, metaDataSubType, metaDataConfig }) => {
-//         newData[dataKey] = metaDataSubType === 'foreignKey' 
-//           ? generator[metaDataType]?.[metaDataSubType]?.(metaDataConfig)
-//           : generator[metaDataType]?.[metaDataSubType]?.(metaDataConfig)
-//       })
-//     })  
-  
-//     return newData
-//   }
-
-//   // const generatorPromise = util.promisify(generate)
-
-//   // return await generatorPromise()
-//   //   .then((data: any[]) => data)
-//   return generate()
-  
-// }
-
-export const createTestTableData = async (
-  tableName: string, 
+export async function createTestTableData<T> (
+  tableName: TableName, 
   numEntries = 100, 
   reset = false
-) => {
+) {
   const currSchema = require(`@/app/api/${tableName}/schemas.ts`)
-  type CurrType = z.infer<typeof currSchema.schema>;
+  // type T = z.infer<typeof currSchema.schema>;
   console.log('*** CurrConfig\n', currSchema.dbConfig)
 
   const { 
     createNew, 
     dbConfig 
   }: { 
-    createNew: () => CurrType, 
-    dbConfig: FakeTableConfig<CurrType> 
+    createNew: () => T, 
+    dbConfig: FakeTableConfig<T> 
   } = currSchema
   const tableUrl = path.join(process.cwd(), `data/testData/${tableName}.json`)
-  const currData = reset ? [] : await getJSONContents(tableUrl)
+  const currData: T[] = reset ? [] : await getJSONContents(tableUrl)
   // console.log('*** tableName at root\n', tableName)
-  console.log('*** currData.length - ', currData?.length)
+  // console.log('*** currData.length - ', currData?.length)
 
   const newData = Array.from({ length: numEntries }, createNew)
   const tableData = [...currData, ...newData]
 
-  console.log('*** tableData.length - ', tableData?.length)
-
+  // console.log('*** tableData.length - ', tableData?.length)
   
   await addDataToJSON(tableUrl, tableData)
-  console.log('*** dbConfig\n', dbConfig)
-  createForeignData(dbConfig, newData)
+  createForeignData<T>(dbConfig, newData)
 
   // dbConfig
   //   .filter(({ metaDataType, metaDataConfig }) => ( 

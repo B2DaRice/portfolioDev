@@ -1,6 +1,7 @@
-import { FakeTableConfig, createNewId, generateWebsite, getRandomForeignIds, rollOptional } from '@/app/api/utils/fakerUtils'
+import { FakeTableConfig, addForeignIds, createNewId, generateWebsite, getRandomForeignIds, rollOptional } from '@/app/api/utils/fakerUtils'
 import { faker } from '@faker-js/faker'
 import { z } from 'zod'
+import { getDbConfigMap } from '../utils/serverUtils'
 
 export const schema = z.object({
   id: z.string(),
@@ -88,41 +89,17 @@ export const dbConfig: FakeTableConfig<TypeFromSchema> = [
   // }
 ]
 
+const dbConfigMap = getDbConfigMap<TypeFromSchema>(dbConfig)
+
 export const createNew = (newId?: string) => {
   const NULL_PROBABILITY_MAX = 3;
   const newOrgName = `${faker.hacker.adjective().replace(/^./, (letter: any) => letter.toUpperCase())} ${faker.hacker.noun().replace(/^./, (letter: any) => letter.toUpperCase())}`
   
-  const newOrg: TypeFromSchema = { 
+  let newOrg: TypeFromSchema = { 
     id: newId ?? createNewId(),
     name: newOrgName,
     website: generateWebsite(newOrgName)
   };
 
-  const foreignKeys = dbConfig.filter(({ metaDataType, metaDataConfig }) => {
-    const doAdd = !metaDataConfig?.optional || rollOptional(NULL_PROBABILITY_MAX)
-    return doAdd && metaDataType === 'foreignKey'
-  });
-
-  foreignKeys.forEach(async ({ dataKey, metaDataConfig }) => {
-    const { foreignTable, numEntriesMinMax, optional } = metaDataConfig!;
-    const { table: foreignTableName, create } = foreignTable!;
-    const numEntries = numEntriesMinMax ? faker.number.int({ min: numEntriesMinMax[0], max: numEntriesMinMax[1] }) : -1
-
-    if (create) {
-      if (numEntriesMinMax) {
-        const newForeignKeys = Array.from({ length: numEntries }, () => createNewId())
-        // @ts-ignore: next-line
-        newOrg[dataKey] = newForeignKeys
-      } else {
-        // @ts-ignore: next-line
-        newOrg[dataKey] = (!optional || rollOptional(NULL_PROBABILITY_MAX)) ? createNewId() : null
-      }
-    } else {
-      const foreignIds = await getRandomForeignIds(foreignTableName, numEntries)
-      // @ts-ignore: next-line
-      newOrg[dataKey] = (!optional || rollOptional(NULL_PROBABILITY_MAX)) ? foreignIds : null
-    }
-  });
-
-  return newOrg;
+  return addForeignIds<TypeFromSchema>(newOrg, dbConfig, NULL_PROBABILITY_MAX)
 }

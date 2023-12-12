@@ -31,28 +31,37 @@ export const tableColumns: TableColumns = [
     accessorKey: 'billingAddressId',
     header: 'Billing Address',
   },
-
   {
     accessorKey: 'contactIds',
     header: 'Contacts',
-    cell: ({ getValue }) => (
-      <div className='flex flex-col gap-1 overflow-auto' style={{ maxHeight: '75px' }}>
-        {
-          getValue().map((id: string, index: number) => (
-            <span
-              key={`property-${index}`}
-              className='mr-2 whitespace-nowrap p-1 opacity-60 border rounded-sm text-xs cursor-pointer hover:opacity-100'
-              onClick={(event) => {
-                event.stopPropagation()
-                console.log(`Id clicked: ${id}`)
-              }}
-            >
-              {id}
-            </span>
-          ))
-        }
-      </div>
-    )
+    cell: ({ getValue }) => {
+      const currValue = getValue()
+
+      const Pill = ({ value, id }: { value: any, id: string }) => (
+        <span
+          key={`property-${id}`}
+          className='mr-2 whitespace-nowrap p-1 opacity-60 border rounded-sm text-xs cursor-pointer hover:opacity-100'
+          onClick={(event) => {
+            event.stopPropagation()
+            console.log(`Id clicked: ${id}`)
+          }}
+        >
+          {id}
+        </span>
+      )
+      
+      return (
+        <div className='flex flex-col gap-1 overflow-auto' style={{ maxHeight: '75px' }}>
+          { Array.isArray(currValue) ? (
+            currValue.map((id: string) => (
+              <Pill value={id} id={id} />
+            ))
+          ) : (
+            <Pill value={currValue} id={currValue} />
+          )}
+        </div>
+      )
+    }
   },
   {
     accessorKey: 'propertyIds',

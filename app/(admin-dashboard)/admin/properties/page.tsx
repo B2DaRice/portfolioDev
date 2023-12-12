@@ -1,6 +1,6 @@
 "use client"
 
-import { propertiesTableColumns, filterConfig } from '@/data/properties/tableConfigs'
+import { propertiesTableColumns, filterConfig } from '@/app/(admin-dashboard)/admin/properties/tableConfigs'
 import { PropertiesDataType } from '@/types/Properties'
 import { useState } from 'react'
 import { ListPage, PageActionType } from '@/components/ListPage'
@@ -12,30 +12,30 @@ const AdminPropertiesPage = () => {
   const [properties, setProperties] = useState<PropertiesDataType[]>([])
 
   const pageActionsConfig: PageActionType[] = [
-    {
-      name: 'addProperty',
-      trigger: {
-        label: 'Add Property',
-        icon: <PlusCircle />
-      },
-      content: {
-        title: 'Add Property',
-        subtitle: 'Enter the details of the job you want to add',
-        body: (
-          <div className="grid gap-8 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="name" className="text-left">
-                Property Name
-              </Label>
+    // {
+    //   name: 'addProperty',
+    //   trigger: {
+    //     label: 'Add Property',
+    //     icon: <PlusCircle />
+    //   },
+    //   content: {
+    //     title: 'Add Property',
+    //     subtitle: 'Enter the details of the job you want to add',
+    //     body: (
+    //       <div className="grid gap-8 py-4">
+    //         <div className="grid grid-cols-4 items-center gap-4">
+    //           <Label htmlFor="name" className="text-left">
+    //             Property Name
+    //           </Label>
 
-              <Input id="propertyName" className="col-span-3" onChange={({ target }) => console.log('*** dialog input -\n', target.value)}/>
-            </div>
-          </div>
-        ),
-        submitLabel: 'Save Property',
-        submitFn: () => console.log('*** dialog submit -\n', '--- Add server func for saving property ---')
-      }
-    }
+    //           <Input id="propertyName" className="col-span-3" onChange={({ target }) => console.log('*** dialog input -\n', target.value)}/>
+    //         </div>
+    //       </div>
+    //     ),
+    //     submitLabel: 'Save Property',
+    //     submitFn: () => console.log('*** dialog submit -\n', '--- Add server func for saving property ---')
+    //   }
+    // }
   ]
 
   return (
