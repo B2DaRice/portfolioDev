@@ -87,15 +87,15 @@ jobs:
           touch out/.nojekyll
 
       - name: Upload artifact
+        id: upload-artifact
         uses: actions/upload-pages-artifact@v2
         with:
           path: ./out
 
       - name: Deploy
         uses: actions/deploy-pages@v3
-        # with: 
-        #   branch: main
-        #   folder: out
+        with: 
+          artifact-id: ${{ steps.upload-artifact.outputs.uploaded-artifact-id }}
 
   # Deployment job
   # deploy:
