@@ -103,10 +103,13 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      # url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Logging
+        run: |
+          echo "Output URL: ${{ steps.deployment.outputs.page_url }}"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v3
