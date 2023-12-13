@@ -1,5 +1,7 @@
 import { z } from 'zod';
-import { FakeTableConfig } from '../utils/fakerUtils';
+import { FakeDataConfig, FakeDataMeta, FakeTableConfig, addForeignIds, createNewId, generateDate, generateNumber, rollOptional } from '../utils/fakerUtils';
+import { faker } from '@faker-js/faker';
+import { getDbConfigMap } from '../utils/serverUtils';
 
 export const schema = z.object({
   id: z.string(),
@@ -7,11 +9,11 @@ export const schema = z.object({
   // jobType: z.string().optional(),
   orgId: z.string().optional(),
   propertyId: z.string().optional(),
-  startDate: z.string().optional(),
+  startDate: z.number().optional(),
   // status: z.string().optional(),
-  createdAt: z.string().optional(),
-  updatedAt: z.string().optional(),
-  dueDate: z.string().optional(),
+  createdAt: z.number().optional(),
+  updatedAt: z.number().optional(),
+  dueDate: z.number().optional(),
   // cleaningDate: z.string().optional(),
   estimatedTimeHr: z.number().optional(),
   cleanerUserId: z.string().optional(),
@@ -104,3 +106,24 @@ export const dbConfig: FakeTableConfig<TypeFromSchema> = [
     }
   },
 ]
+
+const dbConfigMap = getDbConfigMap<TypeFromSchema>(dbConfig)
+
+export const createNew = (newId?: string) => {
+  const NULL_PROBABILITY_MAX = 3;
+
+  const createdAt = generateDate('createdAt', {})
+  const dueDate = generateDate('dueDate', {}, { createdAt })
+  
+  let newJob: TypeFromSchema = { 
+    id: newId ?? createNewId(),
+    createdAt: createdAt,
+    updatedAt: generateDate('updatedAt', {}, { createdAt, dueDate }),
+    startDate: generateDate('startDate', {}, { createdAt, dueDate }),
+    dueDate: dueDate,
+    estimatedTimeHr: generateNumber(dbConfigMap['estimatedTimeHr'].metaDataConfig?.minMax!),
+    totalBilled: generateNumber(dbConfigMap['totalBilled'].metaDataConfig?.minMax!)
+  };
+
+  return addForeignIds<TypeFromSchema>(newJob, dbConfig, NULL_PROBABILITY_MAX)
+}

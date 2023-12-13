@@ -10,8 +10,6 @@ export async function GET(request: NextRequest) {
     console.log('*** requestUrl params:\n', searchParams)
     
     const contacts: TypeFromSchema[] = await getInitTableData(TABLE_NAMES.CONTACTS)
-    console.log('*** contacts from getInitTableData\n', contacts?.length)
-    // console.log('*** parsing orgs => ', z.array(CurrSchema).parse(orgs))
 
     return !contacts
       ? NextResponse.json({ error: 'There was an error retrieving data.' }, { status: 500 })
