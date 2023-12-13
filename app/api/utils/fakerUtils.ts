@@ -44,7 +44,7 @@ export const createNewId = (): string => {
 
 export const generateNumber = (numMinMax: [number, number], useFloat = false) => {
   const newNum = faker.number.int({ min: numMinMax[0], max: numMinMax[1] })
-  console.log('*** newNum\n', newNum)
+  // console.log('*** newNum\n', newNum)
   return useFloat ? newNum/100 : newNum
 }
 
@@ -130,11 +130,11 @@ export const getRandomForeignIds = async (tableName: string, numEntries: number)
 
   const foreignData = await getJSONContents(foreignDataUrl)
     .then((data) => (
-      numEntries > 1
+      numEntries > -1
         ? new Set(Array
           .from({ length: numEntries }, () => data[randomIndex(data.length - 1)])
           .map((item: any) => item.id))
-        : data[randomIndex(data.length - 1)].id
+        : [data[randomIndex(data.length - 1)].id]
     ))
   
   return foreignData || []
@@ -154,11 +154,10 @@ export function addForeignIds<T> (
     const { foreignTable, numEntriesMinMax } = metaDataConfig!;
     const { table: foreignTableName, create } = foreignTable!;
     console.log('*** numEntriesMinMax - ', numEntriesMinMax)
-    const numEntries = numEntriesMinMax ? faker.number.int({ min: numEntriesMinMax[0], max: numEntriesMinMax[1] }) : 1
-    console.log('*** numEntries - ', numEntries)
 
     if (create) {
-      if (numEntries > 1) {
+      if (numEntriesMinMax) {
+        const numEntries = faker.number.int({ min: numEntriesMinMax[0], max: numEntriesMinMax[1] })
         const newForeignKeys = Array.from({ length: numEntries }, () => createNewId())
         // @ts-ignore: next-line
         newData[dataKey] = newForeignKeys
@@ -167,10 +166,10 @@ export function addForeignIds<T> (
         newData[dataKey] = createNewId()
       }
     } else {
-      console.log('*** adding foreign entries - ', numEntries)
+      const numEntries = numEntriesMinMax ? faker.number.int({ min: numEntriesMinMax[0], max: numEntriesMinMax[1] }) : 1
       const foreignIds = await getRandomForeignIds(foreignTableName, numEntries)
       // @ts-ignore: next-line
-      newData[dataKey] = foreignIds || []
+      newData[dataKey] = !numEntriesMinMax && foreignIds ? foreignIds[0] : foreignIds || []
     }
   });
 

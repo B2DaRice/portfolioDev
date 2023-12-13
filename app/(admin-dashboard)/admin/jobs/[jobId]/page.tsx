@@ -5,3 +5,11 @@ export default function AdminJobPage() {
     </div>
   )
 }
+
+export const generateStaticParams = async () => {
+  const jobs: { id: string }[] = [{ id: 'testID-1' }]
+ 
+  return jobs.map(({ id }) => ({
+    slug: id,
+  }))
+}

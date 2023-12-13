@@ -1,5 +1,15 @@
 // import { createServerSupabaseClient } from '@/utils/supabase/server'
 import { NextRequest, NextResponse } from 'next/server'
+import { getInitTableData } from '../../utils/serverUtils'
+import { TABLE_NAMES } from '../../types/database'
+
+// export async function generateStaticParams() {
+//   const properties: { id: string }[] = await getInitTableData(TABLE_NAMES.PROPERTIES)
+ 
+//   return properties.map(({ id }) => ({
+//     slug: id,
+//   }))
+// }
 
 export async function GET(request: NextRequest, { params }: { params: { propertySlug?: string } }) {
   try {
