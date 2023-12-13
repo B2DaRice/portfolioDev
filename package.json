@@ -1,5 +1,5 @@
 {
-  "name": "dev-portfolio",
+  "name": "brice-g-portfolio-dev",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -61,10 +61,33 @@
     "autoprefixer": "^10",
     "eslint": "^8",
     "eslint-config-next": "13.5.4",
+    "gh-pages": "^6.1.0",
     "postcss": "^8",
     "prettier": "3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.7",
     "tailwindcss": "^3",
     "typescript": "^5"
-  }
+  },
+  "description": "This is an example web application to display my abilities as a developer.",
+  "main": "next.config.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/B2DaRice/portfolioDev.git"
+  },
+  "keywords": [
+    "portfolio",
+    "example",
+    "nextjs",
+    "react",
+    "shadcn"
+  ],
+  "author": "Brice Garlick",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/B2DaRice/portfolioDev/issues"
+  },
+  "homepage": "https://github.com/B2DaRice/portfolioDev#readme"
 }

@@ -5,7 +5,6 @@ import { getDbConfigMap } from '../utils/serverUtils';
 
 export const schema = z.object({
   id: z.string(),
-  addressId: z.string().optional(),
   // jobType: z.string().optional(),
   orgId: z.string().optional(),
   propertyId: z.string().optional(),
@@ -33,23 +32,12 @@ export type TypeFromSchema = z.infer<typeof schema>
  */
 export const dbConfig: FakeTableConfig<TypeFromSchema> = [
   {
-    dataKey: 'addressId',
-    metaDataType: 'foreignKey',
-    metaDataConfig: {
-      foreignTable: {
-        table: 'addresses',
-        create: true
-      }
-    }
-  },
-  {
     dataKey: 'orgId',
     metaDataType: 'foreignKey',
     metaDataConfig: {
       optional: true,
       foreignTable: {
         table: 'orgs',
-        create: true,
       }
     }
   },
@@ -60,7 +48,6 @@ export const dbConfig: FakeTableConfig<TypeFromSchema> = [
       optional: true,
       foreignTable: {
         table: 'properties',
-        create: true,
       }
     }
   },
