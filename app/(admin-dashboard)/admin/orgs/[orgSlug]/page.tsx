@@ -5,3 +5,11 @@ export default function AdminOrganizationPage() {
     </div>
   )
 }
+
+export const generateStaticParams = async () => {
+  const orgs: { id: string }[] = [{ id: 'testID-1' }]
+ 
+  return orgs.map(({ id }) => ({
+    slug: id,
+  }))
+}
