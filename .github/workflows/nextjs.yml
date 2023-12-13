@@ -95,7 +95,7 @@ jobs:
       - name: Deploy
         uses: actions/deploy-pages@v3
         with: 
-          artifact-id: ${{ steps.upload-artifact.outputs.uploaded-artifact-id }}
+          artifact_name: github-pages
 
   # Deployment job
   # deploy:
