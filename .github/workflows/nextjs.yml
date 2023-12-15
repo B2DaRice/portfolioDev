@@ -50,11 +50,11 @@ jobs:
       - name: Build development image
         run: docker build -f Dockerfile -t ${{ env.IMAGE_NAME }} .
 
-      # - name: Run development container and build the package
-      #   run: docker run --name portfolio-container portfolio-image
+      - name: Run development container and build the package
+        run: ddocker run -d --name portfolio-container portfolio-image
 
       - name: Copy built package from container to host
-        run: docker cp porfoliodev:/app/.next ./dist
+        run: docker cp porfolio-container:/app/.next ./dist
 
       - name: Get short SHA
         id: short-sha
