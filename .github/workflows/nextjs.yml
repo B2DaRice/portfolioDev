@@ -50,8 +50,8 @@ jobs:
       - name: Build development image
         run: docker build -f Dockerfile -t portfolio .
 
-      - name: Run development container and build the package
-        run: docker run portfolio
+      # - name: Run development container and build the package
+      #   run: docker run portfolio
 
       # - name: Copy built package from container to host
       #   run: docker cp porfolio:/app/target/wheels ./dist
