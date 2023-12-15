@@ -15,7 +15,7 @@ on:
   workflow_dispatch:
 
 env:
-  IMAGE_NAME: portfolio
+  IMAGE_NAME: portfolio-image
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions: 'write-all'
@@ -48,7 +48,7 @@ jobs:
             ${{ runner.os }}-buildx-
 
       - name: Build development image
-        run: COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build
+        run: docker build -f Dockerfile -t ${{ env.IMAGE_NAME }} .
 
       # - name: Run development container and build the package
       #   run: docker run --name portfolio-container portfolio-image
