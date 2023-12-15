@@ -119,7 +119,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 COPY package.json yarn.lock ./
-RUN  yarn install --frozen-lockfile && yarn install --production && yarn add autoprefixer && yarn add postcss && yarn add tailwindcss
+RUN  yarn install --frozen-lockfile && yarn install --production
 
 # ##############################################
 FROM node:18-alpine AS builder
