@@ -67,10 +67,24 @@
 # CMD ["node", "server.js"]
 
 FROM node:18-alpine AS base
-RUN apk add --no-cache g++ make py3-pip libc6-compat
+RUN apk add --no-cache g++ make libc6-compat
 WORKDIR /app
 COPY package*.json ./
 EXPOSE 3000
+
+FROM base AS deps
+# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+
+# Install dependencies based on the preferred package manager
+COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+RUN \
+  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
+  elif [ -f package-lock.json ]; then npm ci; \
+  elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
+  else echo "Lockfile not found." && exit 1; \
+  fi
 
 FROM base AS builder
 WORKDIR /app
@@ -81,7 +95,6 @@ RUN yarn build
 
 FROM base AS production
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
 
 ENV NODE_ENV=production
 RUN yarn install --frozen-lockfile
