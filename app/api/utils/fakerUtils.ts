@@ -153,7 +153,6 @@ export function addForeignIds<T> (
   foreignKeys.forEach(async ({ dataKey, metaDataConfig }) => {
     const { foreignTable, numEntriesMinMax } = metaDataConfig!;
     const { table: foreignTableName, create } = foreignTable!;
-    console.log('*** numEntriesMinMax - ', numEntriesMinMax)
 
     if (create) {
       if (numEntriesMinMax) {
@@ -182,8 +181,6 @@ export async function createTestTableData<T> (
   reset = false
 ) {
   const currSchema = require(`@/app/api/${tableName}/schemas.ts`)
-  // type T = z.infer<typeof currSchema.schema>;
-  console.log('*** CurrConfig\n', currSchema.dbConfig)
 
   const { 
     createNew, 
@@ -204,24 +201,6 @@ export async function createTestTableData<T> (
   
   await addDataToJSON(tableUrl, tableData)
   createForeignData<T>(dbConfig, newData)
-
-  // dbConfig
-  //   .filter(({ metaDataType, metaDataConfig }) => ( 
-  //     metaDataConfig?.foreignTable?.create && metaDataType === 'foreignKey'
-  //   ))
-  //   .forEach(({ dataKey, metaDataConfig }) => {
-  //     const { table: foreignTableName } = metaDataConfig!.foreignTable!
-  //     const foreignTableUrl = path.join(process.cwd(), `data/testData/${foreignTableName}.json`)
-  //     const { createNew } = require(`@/app/api/${foreignTableName}/schemas.ts`)
-
-  //     newData.forEach((item) => {
-  //       const newDataFromIds = Array.from(item[dataKey], (newId) => createNew(newId))
-  //       addDataToJSON(foreignTableUrl, newDataFromIds)
-  //       console.log(`✅ ${foreignTableName} Table foreign data generated.`)
-  //     })
-  //   })
-
-  // fs.writeFileSync(tableUrl, JSON.stringify(tableData, null, 2))
 
   console.log(`✅ ${tableName} Table data generated.`)
   return tableData
