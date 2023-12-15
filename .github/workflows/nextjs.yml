@@ -51,7 +51,7 @@ jobs:
         run: docker build -f Dockerfile -t ${{ env.IMAGE_NAME }} .
 
       - name: Run development container and build the package
-        run: docker run -d portfolio-image
+        run: docker run --name portfoliodev portfolio-image
 
       - name: Copy built package from container to host
         run: docker cp porfoliodev:/app/.next ./dist
