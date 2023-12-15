@@ -51,10 +51,10 @@ jobs:
         run: docker build -f Dockerfile -t ${{ env.IMAGE_NAME }} .
 
       - name: Run development container and build the package
-        run: docker run -d --name portfolio-container portfolio-image
+        run: docker run -d portfolio-image
 
       - name: Copy built package from container to host
-        run: docker cp porfolio-container:/app/.next ./dist
+        run: docker cp porfoliodev:/app/.next ./dist
 
       - name: Get short SHA
         id: short-sha
