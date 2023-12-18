@@ -105,11 +105,15 @@ jobs:
       pages: write
       id-token: write
     steps:
+      # - name: Init Logging
+      #   run: |
+      #     echo "Output URL: "
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v3
-        with:
-          artifact_name: portfolio-dev:latest
+        # with:
+        #   artifact_name: portfolio-dev:latest
       
       - name: Logging
         run: |
