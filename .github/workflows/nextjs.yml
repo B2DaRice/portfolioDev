@@ -101,12 +101,14 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+    permissions:
+      pages: write
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v3
         with:
-          artifact_name: portfolio-dev
+          artifact_name: portfolio-dev:latest
       
       - name: Logging
         run: |
