@@ -80,7 +80,7 @@ jobs:
           file: ./Dockerfile
           push: false
           tags: |
-            ghcr.io/b2darice/${{ steps.short-sha.outputs.sha }}
+            ghcr.io/b2darice/portfolio-dev:latest
             ghcr.io/b2darice/${{ github.ref == 'refs/heads/master' && 'latest' || steps.short-sha.outputs.sha }}
             ghcr.io/b2darice/${{ startsWith(github.ref, 'refs/tags/') && steps.get_version.outputs.VERSION || steps.short-sha.outputs.sha }}
           cache-from: type=local,src=/tmp/.buildx-cache
@@ -89,10 +89,10 @@ jobs:
 
       - name: Import image in containerd
         run: |
-          sudo ctr i import --base-name ghcr.io/b2darice/${{ steps.short-sha.outputs.sha }} --digests --all-platforms /tmp/image.tar
+          sudo ctr i import --base-name ghcr.io/b2darice/portfolio-dev --digests --all-platforms /tmp/image.tar
       - name: Push image with containerd
         run: |
-          sudo ctr --debug i push --user "b2darice:${{ secrets.GITHUB_TOKEN }}" ghcr.io/b2darice/${{ steps.short-sha.outputs.sha }}:latest
+          sudo ctr --debug i push --user "b2darice:${{ secrets.GITHUB_TOKEN }}" ghcr.io/b2darice/portfolio-dev:latest
 
   # Deployment job
   deploy:
