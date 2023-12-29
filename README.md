@@ -9,7 +9,7 @@ Clone the repo
 cd into the repo directory
 
 ```bash
-yarn
+yarn install
 ```
 
 ## Getting Started
